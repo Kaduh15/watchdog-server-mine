@@ -9,13 +9,16 @@ import mcrcon
 from dotenv import load_dotenv
 
 # Configurar logging
+log_handlers = [logging.StreamHandler(sys.stdout)]
+
+# Adicionar file handler se o diretório existir
+if os.path.exists('/app/logs'):
+    log_handlers.append(logging.FileHandler('/app/logs/watchdog.log', mode='a'))
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('/app/logs/watchdog.log', mode='a') if os.path.exists('/app/logs') else logging.NullHandler()
-    ]
+    handlers=log_handlers
 )
 logger = logging.getLogger(__name__)
 

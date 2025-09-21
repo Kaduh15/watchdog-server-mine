@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   watchdog:
     build:
@@ -24,12 +22,12 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    # Recursos limitados para produção
+    # Recursos para produção (mais generosos)
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 256M
+          cpus: '1.0'
+          memory: 512M
         reservations:
-          cpus: '0.1'
-          memory: 64M
+          cpus: '0.25'
+          memory: 128M
