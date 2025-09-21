@@ -11,9 +11,12 @@ from dotenv import load_dotenv
 # Configurar logging
 log_handlers = [logging.StreamHandler(sys.stdout)]
 
-# Adicionar file handler se o diretório existir
+# Adicionar file handler se o diretório existir e for escritável
 if os.path.exists('/app/logs'):
-    log_handlers.append(logging.FileHandler('/app/logs/watchdog.log', mode='a'))
+    try:
+        log_handlers.append(logging.FileHandler('/app/logs/watchdog.log', mode='a'))
+    except (PermissionError, IOError) as e:
+        print(f"Warning: Não foi possível criar arquivo de log: {e}")
 
 logging.basicConfig(
     level=logging.INFO,

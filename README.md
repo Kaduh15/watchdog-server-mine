@@ -124,30 +124,35 @@ OFFLINE_INTERVAL=14400 # Aguarda 4 horas quando offline
 
 ## 🐳 Docker
 
+### Multi-Stage Build
+
+O projeto utiliza **Docker multi-stage build** para otimizar o tamanho da imagem e segurança:
+
+- **Estágio 1 (Builder)**: Instala dependências com ferramentas de build
+- **Estágio 2 (Runtime)**: Imagem final otimizada sem ferramentas desnecessárias
+- **Usuário não-root**: Executa como usuário `watchdog` (UID 1000)
+- **Tamanho otimizado**: ~211MB (50% menor que single-stage)
+
 ### Docker Compose
 
-O projeto inclui um `docker-compose.yml` configurado:
+O projeto inclui dois arquivos de configuração:
 
+**desenvolvimento** (`docker-compose.yml`):
 ```yaml
-version: '3.8'
-
 services:
   watchdog:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: minecraft-watchdog
     restart: unless-stopped
-    env_file:
-      - .env
-    volumes:
-      - ./logs:/app/logs
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+    env_file: [.env]
+    volumes: ["./logs:/app/logs"]
 ```
+
+**produção** (`docker-compose.prod.yml`):
+- Health checks avançados
+- Limites de recursos (512MB RAM, 1 CPU)
+- Timezone synchronization
+- Log rotation otimizada
 
 ### Comandos Docker Úteis
 

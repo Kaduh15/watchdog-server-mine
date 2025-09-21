@@ -16,18 +16,24 @@ def check_health():
     try:
         # Método mais simples: verificar se existe processo Python rodando
         import subprocess
-        result = subprocess.run(['pgrep', '-f', 'main.py'], 
+        
+        # Usar pgrep com usuário específico para evitar problemas de permissão
+        result = subprocess.run(['pgrep', '-u', 'watchdog', '-f', 'main.py'], 
                               capture_output=True, text=True)
         
         if result.returncode == 0:
             # Processo encontrado, verificar log se existir
             log_file = '/app/logs/watchdog.log'
             if os.path.exists(log_file):
-                # Verificar se foi atualizado nos últimos 15 minutos
-                log_mtime = datetime.fromtimestamp(os.path.getmtime(log_file))
-                if datetime.now() - log_mtime > timedelta(minutes=15):
-                    print("UNHEALTHY: Log file não atualizado há mais de 15 minutos")
-                    return 1
+                try:
+                    # Verificar se foi atualizado nos últimos 15 minutos
+                    log_mtime = datetime.fromtimestamp(os.path.getmtime(log_file))
+                    if datetime.now() - log_mtime > timedelta(minutes=15):
+                        print("UNHEALTHY: Log file não atualizado há mais de 15 minutos")
+                        return 1
+                except (OSError, IOError) as e:
+                    print(f"WARNING: Não foi possível verificar log file: {e}")
+                    # Continuar mesmo assim, pois o processo principal está rodando
             
             print("HEALTHY: Watchdog está rodando normalmente")
             return 0

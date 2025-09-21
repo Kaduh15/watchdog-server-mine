@@ -39,7 +39,7 @@ env/
 *.swp
 *.swo
 
-# Logs
+# Logs (não incluir no build)
 *.log
 logs/
 
@@ -50,6 +50,7 @@ logs/
 # Documentation
 README.md
 *.md
+LICENSE
 
 # Docker
 Dockerfile*
@@ -63,3 +64,9 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Multi-stage build optimization
+# Apenas copiar arquivos essenciais para o build
+!main.py
+!health_check.py
+!requirements.txt
