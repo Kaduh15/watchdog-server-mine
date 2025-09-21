@@ -25,7 +25,7 @@ Um sistema inteligente de monitoramento para servidores Minecraft que automatica
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO/watchdog-server-mine.git
+git clone https://github.com/Kaduh15/watchdog-server-mine.git
 cd watchdog-server-mine
 
 # Configure as variáveis de ambiente
@@ -40,7 +40,7 @@ docker-compose up -d
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO/watchdog-server-mine.git
+git clone https://github.com/Kaduh15/watchdog-server-mine.git
 cd watchdog-server-mine
 
 # Instale as dependências
@@ -239,9 +239,9 @@ ERROR: Couldn't connect to Docker daemon
 
 ## 📞 Suporte
 
-- 🐛 [Reportar Bug](https://github.com/SEU_USUARIO/watchdog-server-mine/issues)
-- 💡 [Solicitar Feature](https://github.com/SEU_USUARIO/watchdog-server-mine/issues)
-- 📖 [Documentação](https://github.com/SEU_USUARIO/watchdog-server-mine/wiki)
+- 🐛 [Reportar Bug](https://github.com/Kaduh15/watchdog-server-mine/issues)
+- 💡 [Solicitar Feature](https://github.com/Kaduh15/watchdog-server-mine/issues)
+- 📖 [Documentação](https://github.com/Kaduh15/watchdog-server-mine/wiki)
 
 ---
 
