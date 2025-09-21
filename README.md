@@ -152,11 +152,17 @@ services:
 ### Comandos Docker Úteis
 
 ```bash
-# Iniciar o watchdog
+# Iniciar o watchdog (desenvolvimento)
 docker-compose up -d
+
+# Iniciar o watchdog (produção com health check)
+docker-compose -f docker-compose.prod.yml up -d
 
 # Ver logs em tempo real
 docker-compose logs -f
+
+# Verificar saúde do container
+docker-compose ps
 
 # Parar o watchdog
 docker-compose down
