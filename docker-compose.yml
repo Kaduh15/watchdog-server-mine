@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   watchdog:
     build:
@@ -11,6 +13,7 @@ services:
       - RCON_PORT=${RCON_PORT}
       - RCON_PASSWORD=${RCON_PASSWORD}
       - CHECK_INTERVAL=${CHECK_INTERVAL}
+      - OFFLINE_INTERVAL=${OFFLINE_INTERVAL}
       - EMPTY_THRESHOLD=${EMPTY_THRESHOLD}
     env_file:
       - .env
